@@ -1,0 +1,16 @@
+global:
+  scrape_interval: 30s
+  evaluation_interval: 30s
+
+scrape_configs:
+  - job_name: 'raspberry_pi'
+    static_configs:
+      - targets: ['IP_DE_VOTRE_RASPBERRY_PI:8000']
+        labels:
+          location: 'home'
+          device: 'raspberry_pi_zero'
+          sensor: 'bme680'
+
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
