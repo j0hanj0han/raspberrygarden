@@ -5,7 +5,7 @@ global:
 scrape_configs:
   - job_name: 'raspberry_pi'
     static_configs:
-      - targets: ['IP_DE_VOTRE_RASPBERRY_PI:8000']
+      - targets: ['raspberrypigarden.local:8000']
         labels:
           location: 'home'
           device: 'raspberry_pi_zero'
