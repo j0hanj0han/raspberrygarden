@@ -3,21 +3,14 @@ global:
   evaluation_interval: 30s
 
 scrape_configs:
-  - job_name: 'raspberry_pi'
-    static_configs:
-      - targets: ['raspberrypigarden.local:8000']
-        labels:
-          location: 'home'
-          device: 'raspberry_pi_zero'
-          sensor: 'bme680'
   - job_name: 'raspberry_pi_telegraf'
     static_configs:
-      - targets: ['raspberrypigarden.local:9273']
+      - targets: ['192.168.1.127:9273']
         labels:
           location: 'home'
           device: 'raspberry_pi_zero'
           type: 'system'
 
-  - job_name: 'prometheus'
+  - job_name: 'mymachine'
     static_configs:
       - targets: ['localhost:9090']
