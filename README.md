@@ -22,3 +22,27 @@ This project implements a complete observability stack for a Raspberry Pi Zero w
                              |                   |
                              +-------------------+
 ```
+
+
+### installation
+telegraf 
+
+/etc/telegraf/telegraf.d/bme680.conf
+```
+sudo cp bme680.conf /etc/telegraf/telegraf.d/
+sudo chown telegraf:telegraf /etc/telegraf/telegraf.d/bme680.conf
+sudo chmod 644 /etc/telegraf/telegraf.d/bme680.conf
+sudo telegraf -config /etc/telegraf/telegraf.d/bme680.conf -test
+sudo systemctl start telegraf
+sudo journalctl -u telegraf -f # if error
+```
+
+if modif .conf
+```
+sudo systemctl daemon-reload
+sudo systemctl restart telegraf
+```
+
+```
+http://raspberrypigarden.local:9273/metrics
+```

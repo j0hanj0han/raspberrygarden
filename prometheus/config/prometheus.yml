@@ -10,6 +10,13 @@ scrape_configs:
           location: 'home'
           device: 'raspberry_pi_zero'
           sensor: 'bme680'
+  - job_name: 'raspberry_pi_telegraf'
+    static_configs:
+      - targets: ['raspberrypigarden.local:9273']
+        labels:
+          location: 'home'
+          device: 'raspberry_pi_zero'
+          type: 'system'
 
   - job_name: 'prometheus'
     static_configs:
