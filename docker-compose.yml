@@ -42,6 +42,14 @@ services:
     command: -config.file=/etc/loki/loki-config.yaml
     restart: unless-stopped
 
+networks:
+  monitoring:
+    driver: bridge
+
+
+
+
+
 volumes:
   prometheus_data:
     driver: local

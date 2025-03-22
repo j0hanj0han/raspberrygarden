@@ -46,3 +46,10 @@ sudo systemctl restart telegraf
 ```
 http://raspberrypigarden.local:9273/metrics
 ```
+
+
+```
+sudo cp sensor.py /home/pi/
+sudo cp bme680.conf /etc/telegraf/telegraf.d/
+sudo systemctl restart telegraf
+```
