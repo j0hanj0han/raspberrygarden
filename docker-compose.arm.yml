@@ -1,0 +1,51 @@
+version: '2.4'
+
+services:
+  prometheus:
+    image: prom/prometheus:v2.45.0-armv6
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/config:/etc/prometheus
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=15d'
+    restart: unless-stopped
+    mem_limit: 256M
+
+  grafana:
+    image: grafana/grafana-oss:8.5.0-armv6
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=votre_mot_de_passe_securisé
+      - GF_USERS_ALLOW_SIGN_UP=false
+    restart: unless-stopped
+    mem_limit: 256M
+
+  loki:
+    image: grafana/loki:2.8.0-armv6
+    container_name: loki
+    ports:
+      - "3100:3100"
+    volumes:
+      - loki_data:/loki
+      - ./loki/config:/etc/loki
+    command: -config.file=/etc/loki/loki-config.yaml
+    restart: unless-stopped
+    mem_limit: 128M
+
+volumes:
+  prometheus_data:
+  grafana_data:
+  loki_data:
